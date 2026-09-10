@@ -910,7 +910,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1622fa59ea8d70042b5b543a374f2610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mRender: []
+  _mRender:
+  - {fileID: 1597513117}
+  - {fileID: 2126053645}
   baseMat: {fileID: 2100000, guid: 955279a6aed4885418b40ab32645eb26, type: 2}
   hitFlashMaterial: {fileID: 2100000, guid: 050781e51ff90a145b88a2f849e81cd9, type: 2}
   enemyHealth: 5
@@ -1067,6 +1069,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1597513117 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8424073627695423409, guid: 8c483a35b92af9b4398b4ebbdd387280, type: 3}
+  m_PrefabInstance: {fileID: 727842291}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1722174149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,6 +1105,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 494411330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &2126053645 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4431670454091400558, guid: 8c483a35b92af9b4398b4ebbdd387280, type: 3}
+  m_PrefabInstance: {fileID: 727842291}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

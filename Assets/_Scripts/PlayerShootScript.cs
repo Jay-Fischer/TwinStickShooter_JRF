@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerShootScript : MonoBehaviour
 {
     TS_Inputs _inputs;
+    PlayerController _ctrl;
 
     [Header("SpawnSetup")]
     public Transform bulletSpawnPoint;
@@ -18,6 +19,7 @@ public class PlayerShootScript : MonoBehaviour
 
     private void Awake()
     {
+        _ctrl = GetComponent<PlayerController>();
         canShoot = true;
         _inputs = new TS_Inputs();
     }
@@ -41,6 +43,7 @@ public class PlayerShootScript : MonoBehaviour
     }
     IEnumerator PlayerShoot()
     {
+        if(_ctrl.isGamePad) RumbleManager.Instance.RumblePulse(0.2f, 0.2f, 0.15f);
         canShoot = false;
         Rigidbody _shot;
         _shot = Instantiate(baseBullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation) as Rigidbody;

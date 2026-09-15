@@ -8,6 +8,9 @@ public class EnemyHealthScript : MonoBehaviour
     public Material baseMat;
     public Material hitFlashMaterial;
 
+    [Header("Explosion Effect")]
+    public GameObject explosionEffect;
+
     [Header("Enemy Health Count")]
     public int enemyHealth = 5;
         
@@ -33,6 +36,9 @@ public class EnemyHealthScript : MonoBehaviour
         enemyHealth--;
         if (enemyHealth <= 0)
         {
+            Instantiate(explosionEffect, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            yield return new WaitForSeconds(0.025f);
+            HitStopManager.Instance.DoHitStop(3f, 0.4f);
             Destroy(gameObject);
         }
         else

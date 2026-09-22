@@ -16,6 +16,10 @@ public class PlayerShootScript : MonoBehaviour
     public int shotID = 1;
     public int spreadCount = 3;
     public float totalSpreadAngle = 30;
+    public float shotPowerUpTime;
+    public float variablePowerUpTime;
+    public int shootMultiplier = 1;
+    public float shotForceMultiplier = 1;
 
     [Header("Set Shoot Time")]
     public float shootSpeed = 0.2f;
@@ -44,6 +48,17 @@ public class PlayerShootScript : MonoBehaviour
         {
             StartCoroutine(PlayerShoot());
         }
+        shotPowerUpTime -= Time.deltaTime;
+        variablePowerUpTime -= Time.deltaTime;
+        if (shotPowerUpTime <= 0)
+        {
+            shotID = 1;
+        }
+        if (variablePowerUpTime <= 0)
+        {
+            shootMultiplier = 1;
+            shotForceMultiplier = 1;
+        }
     }
     IEnumerator PlayerShoot()
     {
@@ -54,15 +69,15 @@ public class PlayerShootScript : MonoBehaviour
         {
             case 1:
                 _shot = Instantiate(baseBullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation) as Rigidbody;
-                _shot.AddForce(bulletSpawnPoint.forward * ShotForce);
-                yield return new WaitForSeconds(shootSpeed);
+                _shot.AddForce(bulletSpawnPoint.forward * (ShotForce * shotForceMultiplier));
+                yield return new WaitForSeconds(shootSpeed / shootMultiplier);
                 
                 break;
 
             case 2:
                 _shot = Instantiate(largeBullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation) as Rigidbody;
-                _shot.AddForce(bulletSpawnPoint.forward * ShotForce * 0.75f);
-                yield return new WaitForSeconds(shootSpeed);
+                _shot.AddForce(bulletSpawnPoint.forward * (ShotForce * shotForceMultiplier) * 0.5f);
+                yield return new WaitForSeconds((shootSpeed * 2) / shootMultiplier);
 
                 break;
 
@@ -79,9 +94,9 @@ public class PlayerShootScript : MonoBehaviour
 
                     _shot = Instantiate(baseBullet, bulletSpawnPoint.position,
                         Quaternion.LookRotation(_direction)) as Rigidbody;
-                    _shot.AddForce(_direction * ShotForce);
+                    _shot.AddForce(_direction * (ShotForce* shotForceMultiplier));
                 }
-                yield return new WaitForSeconds(shootSpeed);
+                yield return new WaitForSeconds(shootSpeed / shootMultiplier);
 
                 break;
 
@@ -89,5 +104,67 @@ public class PlayerShootScript : MonoBehaviour
         }
         canShoot = true;
 
+    }
+
+    public void UpgradeSpreadShot()
+    {
+        if (spreadCount < 64)
+        {
+            spreadCount++;
+        }
+        if (totalSpreadAngle < 180)
+        {
+            totalSpreadAngle += 5;
+        }
+    }
+
+    public void BigShotPowerup(){
+        if (shotID == 2){
+            shotPowerUpTime += 15.0f;
+        }
+        else
+        {
+            shotID = 2;
+            shotPowerUpTime = 15.0f;
+        }
+    }
+    public void SpreadShotPowerup()
+    {
+        if (shotID == 3)
+        {
+            shotPowerUpTime += 15.0f;
+        }
+        else
+        {
+            shotID = 3;
+            shotPowerUpTime = 15.0f;
+        }
+    }
+
+    public void ShootSpeedPowerUp()
+    {
+        if (shootMultiplier > 1)
+        {
+            variablePowerUpTime += 15.0f;
+        }
+        else
+        {
+            shootMultiplier = 2;
+            shotForceMultiplier = 1;
+            variablePowerUpTime = 15.0f;
+        }
+    }
+    public void ShootForcePowerUp()
+    {
+        if (shotForceMultiplier > 1)
+        {
+            variablePowerUpTime += 15.0f;
+        }
+        else
+        {
+            shootMultiplier = 1;
+            shotForceMultiplier = 1.5f;
+            variablePowerUpTime = 15.0f;
+        }
     }
 }

@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8c483a35b92af9b4398b4ebbdd387280, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 4431670454091400558, guid: 8c483a35b92af9b4398b4ebbdd387280, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -149,7 +153,7 @@ MonoBehaviour:
   - {fileID: 8400230926589014716}
   baseMat: {fileID: 2100000, guid: 955279a6aed4885418b40ab32645eb26, type: 2}
   hitFlashMaterial: {fileID: 2100000, guid: 050781e51ff90a145b88a2f849e81cd9, type: 2}
-  explosionEffect: {fileID: 8468586910131312351, guid: 08eb178c497282b4c940366a7972e164, type: 3}
+  explosionEffect: {fileID: 4670970070935155999, guid: 08eb178c497282b4c940366a7972e164, type: 3}
   enemyHealth: 5
 --- !u!114 &5909998642679648970
 MonoBehaviour:

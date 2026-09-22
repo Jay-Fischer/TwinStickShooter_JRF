@@ -14,6 +14,7 @@ public class EnemyHealthScript : MonoBehaviour
 
     [Header("Enemy Health Count")]
     public int enemyHealth = 5;
+    bool isDead = false;
         
     private void Start()
     {
@@ -40,26 +41,31 @@ public class EnemyHealthScript : MonoBehaviour
     IEnumerator TakeDamage()
     {
         enemyHealth--;
-        if (enemyHealth <= 0)
+        if(!isDead)
         {
-            GameManager.Instance.EnemyKillCount();
-            Instantiate(explosionEffect, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-            yield return new WaitForSeconds(0.025f);
-            HitStopManager.Instance.DoHitStop(3f, 0.4f);
-            Destroy(gameObject);
-        }
-        else
-        {
-            foreach (MeshRenderer m in _mRender)
+            if (enemyHealth <= 0)
             {
-                m.material = hitFlashMaterial;
+                isDead = true;
+                GameManager.Instance.EnemyKillCount();
+                Instantiate(explosionEffect, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                yield return new WaitForSeconds(0.025f);
+                HitStopManager.Instance.DoHitStop(1f, 0.4f);
+                Destroy(gameObject);
             }
-            yield return new WaitForSeconds(0.1f);
+            else
+            {
+                foreach (MeshRenderer m in _mRender)
+                {
+                    m.material = hitFlashMaterial;
+                }
+                yield return new WaitForSeconds(0.1f);
 
-            foreach (MeshRenderer m in _mRender)
-            {
-                m.material = baseMat;
+                foreach (MeshRenderer m in _mRender)
+                {
+                    m.material = baseMat;
+                }
             }
+        
         }
         
     }

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 4f;
     [SerializeField] private Vector2 moveInput;
     [SerializeField] private Vector2 aimInput;
+    private float speedyTimer;
 
     [Header("GamepadSpeakerOutputType Setup")]
     PlayerInput pInput;
@@ -17,12 +18,33 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float controllerRotateSmooth = 1000;
 
     public bool isDead;
+    public int health;
+    public float hitTime = 0;
     public bool isGamePad;
 
     private void Awake()
     {
+        health = 5;
         _inputs = new TS_Inputs();
         cc = GetComponent<CharacterController>();
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (hitTime <= 0.001)
+        {
+            if (other.gameObject.tag == "Enemy")
+            {
+                hitTime = 0.5f;
+                health--;
+                if (health <= 0)
+                {
+                    isDead = true;
+                }
+            }
+        }
+        
+        
     }
 
     private void OnEnable()
@@ -36,11 +58,18 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        speedyTimer -= Time.deltaTime;
+        if (speedyTimer <= 0)
+            moveSpeed = 4.0f;
         handleInputs();
         if (!isDead)
-        {
+        {            
             handleMovement();
             handleRotation();
+            if (hitTime > 0)
+            {
+                hitTime -= Time.deltaTime;
+            }
         }        
     }
     public void OnDeviceChange(PlayerInput ctrl)
@@ -100,5 +129,26 @@ public class PlayerController : MonoBehaviour
             transform.position.y, 
             lookPoint.z);
         transform.LookAt(heightCorrectedPoint);
+    }
+
+
+    public void HealthPowerUp()
+    {
+        health += 3;
+        if (health > 5)
+            health = 5;        
+    }
+
+    public void SpeedPowerUp()
+    {
+        if (speedyTimer > 0)
+        {
+            speedyTimer += 15.0f;
+        }
+        else
+        {
+            speedyTimer = 15.0f;
+            moveSpeed = 6.5f;
+        }
     }
 }

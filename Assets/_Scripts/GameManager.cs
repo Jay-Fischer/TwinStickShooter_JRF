@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int maxEnemyCount;
     public int enemyKills = 0;
     public float spawnSpeed;
+    private int modifiedHealth = 5;
 
     [Header("Panels")]
     public GameObject upgradePanel;
@@ -42,8 +43,14 @@ public class GameManager : MonoBehaviour
             _enemiesInPlay++;
             int _spawnChoice = Random.Range(0, _spawnPoints.Length);
 
-            Instantiate(_enemy, _spawnPoints[_spawnChoice].position,
+            GameObject enemy = Instantiate(_enemy, _spawnPoints[_spawnChoice].position,
                 _spawnPoints[_spawnChoice].rotation);
+            EnemyHealthScript script = enemy.GetComponent<EnemyHealthScript>();
+
+            if (script != null)
+            {
+                script.enemyHealth = modifiedHealth;
+            }
         }
     }
     public void EnemyKillCount()
@@ -54,7 +61,7 @@ public class GameManager : MonoBehaviour
         {
             enemyKills = 0;
             OpenUpgradePanel();
-
+            modifiedHealth++;
         }
             
     }

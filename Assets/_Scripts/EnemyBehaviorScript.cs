@@ -80,4 +80,5 @@ public class EnemyBehavior : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, separationRadius);
     }
+
 }

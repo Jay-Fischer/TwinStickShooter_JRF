@@ -1,5 +1,8 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -21,6 +24,10 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
+    }
+
+    private void Update()
+    {
     }
 
     private void Start()
@@ -70,5 +77,19 @@ public class GameManager : MonoBehaviour
         pausePanel.SetActive(false);
         upgradePanel.SetActive(false);
         gameOverPanel.SetActive(false);
+    }
+
+    public void RestartGame()
+    {
+        UnpauseGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            pauseGame();
+        }
     }
 }

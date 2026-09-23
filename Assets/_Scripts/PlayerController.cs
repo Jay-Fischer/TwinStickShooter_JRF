@@ -17,10 +17,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float controllerDeadZone = 0.1f;
     [SerializeField] float controllerRotateSmooth = 1000;
 
+    [Header("Health And Gameover")]
     public bool isDead;
     public int health;
     public float hitTime = 0;
     public bool isGamePad;
+    public GameObject gameOverPanel;
 
     private void Awake()
     {
@@ -29,17 +31,19 @@ public class PlayerController : MonoBehaviour
         cc = GetComponent<CharacterController>();
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (hitTime <= 0.001)
+    private void OnTriggerEnter(Collider other)
+    {        
+        if (other.gameObject.tag == "Enemy")
         {
-            if (other.gameObject.tag == "Enemy")
+            if (hitTime <= 0)
             {
-                hitTime = 0.5f;
+                hitTime = 1f;
                 health--;
                 if (health <= 0)
                 {
                     isDead = true;
+                    gameOverPanel.SetActive(true);
+                    Time.timeScale = 0;
                 }
             }
         }

@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "TS_Inputs",
     "maps": [
         {
@@ -27,6 +28,15 @@
                     "name": "Shoot",
                     "type": "Button",
                     "id": "587a7f07-a7bf-4e09-8ec7-8e2f48d3debc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "5cfc0096-0c11-47ab-a659-929f59217df1",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -143,36 +153,25 @@
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cb6da0c-ba2d-465d-aab0-ae3c976f144b",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KBM",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
             "name": "UI",
             "id": "b5f3dee3-4e6d-4986-921e-7c24e9940e19",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "fd1fe8a0-720e-4bdf-987e-d4461ccc13e3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "26fe4a70-9216-4e05-b435-ddf27e147ba1",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": [

@@ -85,6 +85,20 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void toTitleScreen()
+    {
+        UnpauseGame();
+        SceneManager.LoadScene(0);
+    }
+    public void toGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void exitGame()
+    {
+        Application.Quit();
+    }
+
     public void OnPause(InputAction.CallbackContext context)
     {
         if (context.performed)
